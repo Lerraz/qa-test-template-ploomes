@@ -1,0 +1,2136 @@
+{
+	"info": {
+		"_postman_id": "f4145ef3-3936-4a79-92d6-d59fb35dfcbd",
+		"name": "Ploomes - Contacts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19196108"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"USER_KEY\", response.value[0].UserKey);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "gateway-api2.ploomes.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://app10.ploomes.com"
+							},
+							{
+								"key": "referer",
+								"value": "https://app10.ploomes.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not_A Brand\";v=\"99\", \"Google Chrome\";v=\"109\", \"Chromium\";v=\"109\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Email\":\"leonardo.ferraz@ploomes.com.br\",\"Password\":\"123\"}"
+						},
+						"url": {
+							"raw": "https://gateway-api2.ploomes.com/Self/Login",
+							"protocol": "https",
+							"host": [
+								"gateway-api2",
+								"ploomes",
+								"com"
+							],
+							"path": [
+								"Self",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST - Contacts",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso Company",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var response = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"ID_COMPANY\", response.value[0].Id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Empresa ficticia, cadastro completo\",\r\n    \"LegalName\": \"ABC Teste QA\",\r\n    \"LineOfBusinessId\": 40043294,\r\n    \"OriginId\": 40009331,\r\n    \"Register\": \"08092754000120\",\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Comercial\"\r\n            },\r\n            \"TypeId\": 1,\r\n            \"PhoneNumber\": \"(11) 99887-7665\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002226,\r\n            \"Name\": \"Empresa Teste\",\r\n            \"Color\": \"#ff2929\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002226\r\n        },\r\n        {\r\n            \"Id\": 40002227,\r\n            \"Name\": \"Teste QA\",\r\n            \"Color\": \"#6ed243\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002227\r\n        },\r\n        {\r\n            \"Id\": 40002228,\r\n            \"Name\": \"Cadastro Completo\",\r\n            \"Color\": \"#a9ff05\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002228\r\n        }\r\n    ],\r\n    \"StreetAddress\": \"Avenida Rio Negro, s/n Bloco Sala 05\",\r\n    \"StreetAddressLine2\": \"Portão Azul\",\r\n    \"Neighborhood\": \"Centro (Vila Waimiri)\",\r\n    \"ZipCode\": 69736970,\r\n    \"CityId\": 400044375,\r\n    \"State\": \"AMAZONAS\",\r\n    \"Country\": \"BRASIL\",\r\n    \"Email\": \"empresateste@empresa.com.br\",\r\n    \"Website\": \"www.empresateste.com.br\",\r\n    \"OwnerId\": 40006168,\r\n    \"RelationshipId\": 40005612,\r\n    \"Note\": \"Aqui tem um breve observação\",\r\n    \"TypeId\": 1,\r\n    \"CompanyId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var response = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"ID_CUSTOMER\", response.value[0].Id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"José Alberto\",\r\n    \"CompanyId\": 400608856,\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 3,\r\n                \"Name\": \"Residencial\"\r\n            },\r\n            \"TypeId\": 3,\r\n            \"PhoneNumber\": \"(99) 88776-6554\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 2,\r\n                \"Name\": \"Celular\"\r\n            },\r\n            \"TypeId\": 2,\r\n            \"PhoneNumber\": \"(88) 7766-5544\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        }\r\n    ],\r\n    \"Email\": \"emailcustomer#teste\",\r\n    \"RoleId\": 40018540,\r\n    \"DepartmentId\": 40011697,\r\n    \"Register\": \"19410229014\",\r\n    \"Birthday\": \"2028-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"Note\": \"alô teste funcionalidade de gravação\",\r\n    \"CityId\": null,\r\n    \"CountryId\": null,\r\n    \"StateId\": null,\r\n    \"TypeId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Objeto em branco - Obrigatoriedade",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": 123,\r\n    \"LegalName\": 123,\r\n    \"Register\": 123,\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Name\": 123\r\n            },\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"StreetAddress\": 123,\r\n    \"StreetAddressLine2\": 123,\r\n    \"Neighborhood\": 123,\r\n    \"State\": 123,\r\n    \"Country\": 123,\r\n    \"Email\": 123,\r\n    \"Website\": 123,\r\n    \"Note\": 123,\r\n    \"CompanyId\": 123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 3,\r\n                \"Name\": 123\r\n            },\r\n            \"TypeId\": 3,\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 2,\r\n                \"Name\": 123\r\n            },\r\n            \"TypeId\": 2,\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": 123,\r\n    \"Register\": 123,\r\n    \"Note\": 123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"LineOfBusinessId\": \"40043294\",\r\n    \"OriginId\": \"40009331\",\r\n\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"1\"\r\n            },\r\n            \"TypeId\": \"1\",\r\n            \"Country\": {\r\n                \"Id\": \"76\"\r\n            },\r\n            \"CountryId\": \"76\"\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        },\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        },\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"Country\": {\r\n                \"Id\": \"abc\"\r\n            }\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"Country\": {\r\n                \"Id\": \"abc\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Regex",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Register\": \"qualquer informação\",\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Color\": \"qualquer informação\"\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Regex",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        },\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\",\r\n    \"Register\": \"qualquer informação\",\r\n    \"Birthday\": \"5000-02-04T00:00-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        },\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\",\r\n    \"Register\": \"qualquer informação\",\r\n    \"Birthday\": \"5000-02-04T00:00-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GET - Contacts",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso Nenhum Filtro",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Todos os Filtros",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts?$top=15&$skip=0&$select=Id, Name&$expand=Type&$filter=((TypeId+eq+2))+and+(contains(Name,'José'))&$orderby=Name+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Name"
+										},
+										{
+											"key": "$expand",
+											"value": "Type"
+										},
+										{
+											"key": "$filter",
+											"value": "((TypeId+eq+2))+and+(contains(Name,'José'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Name+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Order por Name - ASC",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Order By Name\", function () {\r",
+											"    var a = 0, tmp = 0;\r",
+											"    var jsonData = pm.response.json();\r",
+											"    console.log(jsonData.value[0].Name)\r",
+											"    for (var i = a; i < jsonData.value.length-1; i++) {\r",
+											"        if(jsonData.value[i].Name.toLowerCase() > jsonData.value[i+1].Name.toLowerCase()){\r",
+											"            tmp = tmp + 1;\r",
+											"        }\r",
+											"        pm.expect(tmp).to.be.eql(0);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts?$top=15&$skip=0&$select=Id, Name&$expand=Type&$orderby=Name+asc&$filter=((TypeId+eq+2))",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Name"
+										},
+										{
+											"key": "$expand",
+											"value": "Type"
+										},
+										{
+											"key": "$orderby",
+											"value": "Name+asc"
+										},
+										{
+											"key": "$filter",
+											"value": "((TypeId+eq+2))"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Order por Name - DESC",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Order By Name\", function () {\r",
+											"    var a = 0, tmp = 0;\r",
+											"    var jsonData = pm.response.json();\r",
+											"    console.log(jsonData.value[0].Name)\r",
+											"    for (var i = a; i < jsonData.value.length-1; i++) {\r",
+											"        if(jsonData.value[i].Name.toLowerCase() < jsonData.value[i+1].Name.toLowerCase()){\r",
+											"            tmp = tmp + 1;\r",
+											"        }\r",
+											"        pm.expect(tmp).to.be.eql(0);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts?$top=15&$skip=0&$select=Id, Name&$expand=Type&$filter=((TypeId+eq+2))&$orderby=Name+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Name"
+										},
+										{
+											"key": "$expand",
+											"value": "Type"
+										},
+										{
+											"key": "$filter",
+											"value": "((TypeId+eq+2))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Name+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Filtros em Branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts?$top=&$skip=&$select=&$expand=&$filter=&$orderby=",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": ""
+										},
+										{
+											"key": "$skip",
+											"value": ""
+										},
+										{
+											"key": "$select",
+											"value": ""
+										},
+										{
+											"key": "$expand",
+											"value": ""
+										},
+										{
+											"key": "$filter",
+											"value": ""
+										},
+										{
+											"key": "$orderby",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "ABC"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts?$top=15&$skip=0&$select=Id, Name&$expand=Type&$filter=((TypeId+eq+2))+and+(contains(Name,'José'))&$orderby=Name+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Name"
+										},
+										{
+											"key": "$expand",
+											"value": "Type"
+										},
+										{
+											"key": "$filter",
+											"value": "((TypeId+eq+2))+and+(contains(Name,'José'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Name+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PATCH - Contacts",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso Company - Parcial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Empresa ficticia, cadastro completo Atualizado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Company - Completo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Empresa ficticia, cadastro completo Atualizado\",\r\n    \"LegalName\": \"ABC Teste QA\",\r\n    \"LineOfBusinessId\": 40043294,\r\n    \"OriginId\": 40009331,\r\n    \"Register\": \"08092754000120\",\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Comercial\"\r\n            },\r\n            \"TypeId\": 1,\r\n            \"PhoneNumber\": \"(11) 99887-7665\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002226,\r\n            \"Name\": \"Empresa Teste\",\r\n            \"Color\": \"#ff2929\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002226\r\n        },\r\n        {\r\n            \"Id\": 40002227,\r\n            \"Name\": \"Teste QA\",\r\n            \"Color\": \"#6ed243\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002227\r\n        },\r\n        {\r\n            \"Id\": 40002228,\r\n            \"Name\": \"Cadastro Completo\",\r\n            \"Color\": \"#a9ff05\",\r\n            \"EntityId\": 1,\r\n            \"Entity\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Clientes\"\r\n            },\r\n            \"TagId\": 40002228\r\n        }\r\n    ],\r\n    \"StreetAddress\": \"Avenida Rio Negro, s/n Bloco Sala 05\",\r\n    \"StreetAddressLine2\": \"Portão Azul\",\r\n    \"Neighborhood\": \"Centro (Vila Waimiri)\",\r\n    \"ZipCode\": 69736970,\r\n    \"CityId\": 400044375,\r\n    \"State\": \"AMAZONAS\",\r\n    \"Country\": \"BRASIL\",\r\n    \"Email\": \"empresateste@empresa.com.br\",\r\n    \"Website\": \"www.empresateste.com.br\",\r\n    \"OwnerId\": 40006168,\r\n    \"RelationshipId\": 40005612,\r\n    \"Note\": \"Aqui tem um breve observação\",\r\n    \"TypeId\": 1,\r\n    \"CompanyId\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Customer - Parcial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"José Alberto Nascimento\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Customer - Completo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"José Alberto Nascimento\",\r\n    \"CompanyId\": 400608856,\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 3,\r\n                \"Name\": \"Residencial\"\r\n            },\r\n            \"TypeId\": 3,\r\n            \"PhoneNumber\": \"(99) 88776-6554\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 2,\r\n                \"Name\": \"Celular\"\r\n            },\r\n            \"TypeId\": 2,\r\n            \"PhoneNumber\": \"(88) 7766-5544\",\r\n            \"Country\": {\r\n                \"Id\": 76,\r\n                \"Short\": \"BRA\",\r\n                \"Short2\": \"BR\",\r\n                \"Name\": \"BRASIL\",\r\n                \"PhoneMask\": \"(99) 9999?9-9999\"\r\n            },\r\n            \"CountryId\": 76\r\n        }\r\n    ],\r\n    \"Email\": \"emailcustomer@teste\",\r\n    \"RoleId\": 40018540,\r\n    \"DepartmentId\": 40011697,\r\n    \"Register\": \"19410229014\",\r\n    \"Birthday\": \"2028-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"Note\": \"alô teste funcionalidade de gravação\",\r\n    \"CityId\": null,\r\n    \"CountryId\": null,\r\n    \"StateId\": null,\r\n    \"TypeId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Objeto em branco - Obrigatoriedade",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": 123,\r\n    \"LegalName\": 123,\r\n    \"Register\": 123,\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Name\": 123\r\n            },\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"StreetAddress\": 123,\r\n    \"StreetAddressLine2\": 123,\r\n    \"Neighborhood\": 123,\r\n    \"State\": 123,\r\n    \"Country\": 123,\r\n    \"Email\": 123,\r\n    \"Website\": 123,\r\n    \"Note\": 123,\r\n    \"CompanyId\": 123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 3,\r\n                \"Name\": 123\r\n            },\r\n            \"TypeId\": 3,\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": 2,\r\n                \"Name\": 123\r\n            },\r\n            \"TypeId\": 2,\r\n            \"PhoneNumber\": 123,\r\n            \"Country\": {\r\n                \"Short\": 123,\r\n                \"Short2\": 123,\r\n                \"Name\": 123,\r\n                \"PhoneMask\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": 123,\r\n    \"Register\": 123,\r\n    \"Note\": 123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"LineOfBusinessId\": \"40043294\",\r\n    \"OriginId\": \"40009331\",\r\n\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"1\"\r\n            },\r\n            \"TypeId\": \"1\",\r\n            \"Country\": {\r\n                \"Id\": \"76\"\r\n            },\r\n            \"CountryId\": \"76\"\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        },\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        },\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"a\",\r\n            \"Entity\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"Country\": {\r\n                \"Id\": \"abc\"\r\n            }\r\n        },\r\n        {\r\n            \"Type\": {\r\n                \"Id\": \"a\"\r\n            },\r\n            \"Country\": {\r\n                \"Id\": \"abc\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Company - Regex",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Register\": \"qualquer informação\",\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Tags\": [\r\n        {\r\n            \"Color\": \"qualquer informação\"\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Customer - Regex",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        },\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\",\r\n    \"Register\": \"qualquer informação\",\r\n    \"Birthday\": \"5000-02-04T00:00-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Phones\": [\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        },\r\n        {\r\n            \"PhoneNumber\": \"qualquer informação\",\r\n            \"Country\": {\r\n                \"PhoneMask\": \"qualquer informação\"\r\n            }\r\n        }\r\n    ],\r\n    \"Email\": \"qualquer informação\",\r\n    \"Register\": \"qualquer informação\",\r\n    \"Birthday\": \"5000-02-04T00:00-03:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - ID Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Empresa ficticia, cadastro completo Atualizado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts(12345678910987654321)",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts(12345678910987654321)"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DELETE - Contacts",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso Company",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_COMPANY}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_COMPANY}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts({{ID_CUSTOMER}})",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts({{ID_CUSTOMER}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - ID Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api2.ploomes.com/Contacts(12345678910987654321)",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Contacts(12345678910987654321)"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

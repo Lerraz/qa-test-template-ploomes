@@ -1,0 +1,1351 @@
+{
+	"info": {
+		"_postman_id": "d4a92390-3afe-45ea-a97f-c64abafe06e0",
+		"name": "Ploomes - Deals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19196108"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"USER_KEY\", response.value[0].UserKey);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "gateway-api2.ploomes.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://app10.ploomes.com"
+							},
+							{
+								"key": "referer",
+								"value": "https://app10.ploomes.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not_A Brand\";v=\"99\", \"Google Chrome\";v=\"109\", \"Chromium\";v=\"109\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Email\":\"leonardo.ferraz@ploomes.com.br\",\"Password\":\"123\"}"
+						},
+						"url": {
+							"raw": "https://gateway-api2.ploomes.com/Self/Login",
+							"protocol": "https",
+							"host": [
+								"gateway-api2",
+								"ploomes",
+								"com"
+							],
+							"path": [
+								"Self",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST - Deals",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var response = JSON.parse(responseBody);\r",
+											"pm.globals.set(\"ID_DEALS\", response.value[0].Id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo\",\r\n    \"CurrencyId\": 1,\r\n    \"Amount\": 100,\r\n    \"ContactId\": 400608931,\r\n    \"PersonId\": null,\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002245,\r\n            \"Name\": \"marcador negocio\",\r\n            \"Color\": \"#5fc3e6\",\r\n            \"EntityId\": 5,\r\n            \"Entity\": {\r\n                \"Id\": 5,\r\n                \"Name\": \"{2:Aa:p}\"\r\n            },\r\n            \"TagId\": 40002245\r\n        }\r\n    ],\r\n    \"OriginId\": 40009334,\r\n    \"StartDate\": \"2023-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": 40006169,\r\n            \"Name\": \"Automação\",\r\n            \"AvatarUrl\": \"https://stgploomescrmprd01.blob.core.windows.net/crm-prd/automation.png\",\r\n            \"Profile\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Administrador\",\r\n                \"Administrator\": true,\r\n                \"ContactsModule\": true,\r\n                \"ContactsView\": 1,\r\n                \"ContactsEdit\": 1,\r\n                \"ContactsDelete\": 1,\r\n                \"ContactsPersonCreatePermission\": true,\r\n                \"ContactsCompanyCreatePermission\": true,\r\n                \"ContactsCreatePermission\": true,\r\n                \"ContactsProductsViewPermission\": true,\r\n                \"ContactsProductsCreatePermission\": true,\r\n                \"ContactsProductsEditPermission\": true,\r\n                \"ContactsProductsDeletePermission\": true,\r\n                \"DealsModule\": true,\r\n                \"DealsView\": 1,\r\n                \"DealsContactsView\": false,\r\n                \"DealsEdit\": 1,\r\n                \"DealsContactsEdit\": false,\r\n                \"DealsDelete\": 1,\r\n                \"DealsContactsDelete\": false,\r\n                \"DealsCreatePermission\": true,\r\n                \"DealsWinOrLosePermission\": true,\r\n                \"DealsReopenPermission\": true,\r\n                \"QuotesModule\": true,\r\n                \"QuotesCreatePermission\": true,\r\n                \"QuotesEditPermission\": true,\r\n                \"QuotesDeletePermission\": true,\r\n                \"LeadsModule\": true,\r\n                \"LeadsView\": 1,\r\n                \"LeadsEdit\": 1,\r\n                \"LeadsUpdateStatusPermission\": true,\r\n                \"LeadsDelete\": 1,\r\n                \"LeadsCreatePermission\": true,\r\n                \"OrdersModule\": true,\r\n                \"OrdersView\": 1,\r\n                \"OrdersEdit\": 1,\r\n                \"OrdersDelete\": 1,\r\n                \"OrdersCreatePermission\": true,\r\n                \"DocumentsModule\": true,\r\n                \"DocumentsCreatePermission\": true,\r\n                \"DocumentsEditPermission\": true,\r\n                \"DocumentsDeletePermission\": true,\r\n                \"UsersView\": 1,\r\n                \"ProductsAdministerPermission\": true,\r\n                \"ProductsCreatePermission\": true,\r\n                \"ProductsEditPermission\": true,\r\n                \"ProductsDeletePermission\": true,\r\n                \"TablesCreatePermission\": true,\r\n                \"LossReasonsCreatePermission\": true,\r\n                \"TagsCreatePermission\": true,\r\n                \"CitiesCreatePermission\": true,\r\n                \"OtherOptionsCreatePermission\": true,\r\n                \"ExcelExportPermission\": true,\r\n                \"ExcelImportPermission\": true,\r\n                \"ReportsModule\": true,\r\n                \"EmailsModule\": true,\r\n                \"EmailsView\": 1,\r\n                \"TasksModule\": true,\r\n                \"FullMainTimeline\": true,\r\n                \"GoalsContactsCreate\": 1,\r\n                \"GoalsDealsCreate\": 1,\r\n                \"GoalsLeadsCreate\": 1,\r\n                \"GoalsOrdersCreate\": 1,\r\n                \"GoalsDocumentsCreate\": 1,\r\n                \"GoalsTasksCreate\": 1,\r\n                \"GoalsInteractionRecordsCreate\": 1,\r\n                \"ChatModule\": true,\r\n                \"ChatPermission\": 1,\r\n                \"FieldsCreatePermission\": true,\r\n                \"FieldsEditPermission\": true,\r\n                \"FieldsDeletePermission\": true,\r\n                \"Editable\": false,\r\n                \"Listable\": true,\r\n                \"LogsViewPermission\": 1,\r\n                \"HomeMessagesCreate\": 1,\r\n                \"TeamsView\": 1,\r\n                \"GoalsModule\": true,\r\n                \"LibraryModule\": true,\r\n                \"AttachmentBaseFolderCreatePermission\": true,\r\n                \"ContactPublicFormsCreatePermission\": true,\r\n                \"DealPublicFormsCreatePermission\": true,\r\n                \"CreatorId\": 0,\r\n                \"CreateDate\": \"2018-07-19T22:47:24.9-03:00\",\r\n                \"UpdaterId\": null,\r\n                \"UpdateDate\": null,\r\n                \"QuoteSharePermission\": true,\r\n                \"OrderSharePermission\": true,\r\n                \"DocumentSharePermission\": true,\r\n                \"InteractionRecordDeletePermission\": true,\r\n                \"InteractionRecordEditPermission\": true\r\n            },\r\n            \"display\": \"Automação\",\r\n            \"UserId\": 40006169\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": 400037830,\r\n            \"GroupId\": 400032581,\r\n            \"FamilyId\": null,\r\n            \"Name\": \"teste Produto Relacionado\",\r\n            \"Code\": \"abc123\",\r\n            \"MeasurementUnit\": null,\r\n            \"ImageUrl\": null,\r\n            \"CurrencyId\": null,\r\n            \"UnitPrice\": 58.92,\r\n            \"CreateImportId\": null,\r\n            \"UpdateImportId\": null,\r\n            \"Editable\": true,\r\n            \"Deletable\": true,\r\n            \"Suspended\": false,\r\n            \"CreatorId\": 40006168,\r\n            \"UpdaterId\": null,\r\n            \"CreateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"LastUpdateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"ImportationIdCreate\": null,\r\n            \"ImportationIdUpdate\": null,\r\n            \"Group\": {\r\n                \"Id\": 400032581,\r\n                \"Name\": \"grupo teste\",\r\n                \"FamilyId\": null,\r\n                \"FixedPrice\": false,\r\n                \"CreateImportId\": null,\r\n                \"UpdateImportId\": null,\r\n                \"Editable\": true,\r\n                \"Deletable\": true,\r\n                \"Default\": true,\r\n                \"LastUpdateDate\": \"2023-02-04T15:30:45.18-03:00\",\r\n                \"ImportationIdCreate\": null,\r\n                \"ImportationIdUpdate\": null\r\n            },\r\n            \"Family\": null,\r\n            \"Currency\": null,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": 40006168,\r\n                \"Name\": \"Conta Teste Leonardo Ferraz - Não contatar\",\r\n                \"Email\": \"leonardo.ferraz@ploomes.com.br\",\r\n                \"Phone\": null,\r\n                \"AvatarUrl\": \"https://s3-sa-east-1.amazonaws.com/ploomescrm/avatar_default.jpg\",\r\n                \"RoleId\": null,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": null,\r\n                \"LinkedIn\": null,\r\n                \"Birthday\": null,\r\n                \"NextAnniversary\": null,\r\n                \"PreviousAnniversary\": null,\r\n                \"Integration\": false,\r\n                \"NativeIntegration\": false,\r\n                \"GoogleAuthenticatorConfigured\": null,\r\n                \"UserKey\": null,\r\n                \"LastLogin\": null,\r\n                \"Frequency\": null,\r\n                \"AccountOwner\": true,\r\n                \"ActiveSmtp\": false,\r\n                \"LastSeen\": \"2023-02-04T15:30:25.83-03:00\",\r\n                \"LastSeenRoute\": \"~/Deals/funnel/newdeal\",\r\n                \"Editable\": true,\r\n                \"Suspended\": false,\r\n                \"CreatorId\": 0,\r\n                \"UpdaterId\": null,\r\n                \"CreateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"UpdateDate\": null,\r\n                \"LastUpdateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"LastSeenPlatform\": \"Web\",\r\n                \"ResetPassword\": null,\r\n                \"NoLogin\": null\r\n            },\r\n            \"Updater\": null,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ],\r\n    \"StageId\": 40012386\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Objeto em branco - Obrigatoriedade",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Deal - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": 123,\r\n    \"Tags\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"AvatarUrl\": 123,\r\n            \"Profile\": {\r\n                \"Name\": 123,\r\n                \"Administrator\": 123,\r\n                \"ContactsModule\": 123,\r\n                \"ContactsPersonCreatePermission\": 123,\r\n                \"ContactsCompanyCreatePermission\": 123,\r\n                \"ContactsCreatePermission\": 123,\r\n                \"ContactsProductsViewPermission\": 123,\r\n                \"ContactsProductsCreatePermission\": 123,\r\n                \"ContactsProductsEditPermission\": 123,\r\n                \"ContactsProductsDeletePermission\": 123,\r\n                \"DealsModule\": 123,\r\n                \"DealsContactsView\": 123,\r\n                \"DealsContactsEdit\": 123,\r\n                \"DealsContactsDelete\": 123,\r\n                \"DealsCreatePermission\": 123,\r\n                \"DealsWinOrLosePermission\": 123,\r\n                \"DealsReopenPermission\": 123,\r\n                \"QuotesModule\": 123,\r\n                \"QuotesCreatePermission\": 123,\r\n                \"QuotesEditPermission\": 123,\r\n                \"QuotesDeletePermission\": 123,\r\n                \"LeadsModule\": 123,\r\n                \"LeadsUpdateStatusPermission\": 123,\r\n                \"LeadsCreatePermission\": 123,\r\n                \"OrdersModule\": 123,\r\n                \"OrdersCreatePermission\": 123,\r\n                \"DocumentsModule\": 123,\r\n                \"DocumentsCreatePermission\": 123,\r\n                \"DocumentsEditPermission\": 123,\r\n                \"DocumentsDeletePermission\": 123,\r\n                \"ProductsAdministerPermission\": 123,\r\n                \"ProductsCreatePermission\": 123,\r\n                \"ProductsEditPermission\": 123,\r\n                \"ProductsDeletePermission\": 123,\r\n                \"TablesCreatePermission\": 123,\r\n                \"LossReasonsCreatePermission\": 123,\r\n                \"TagsCreatePermission\": 123,\r\n                \"CitiesCreatePermission\": 123,\r\n                \"OtherOptionsCreatePermission\": 123,\r\n                \"ExcelExportPermission\": 123,\r\n                \"ExcelImportPermission\": 123,\r\n                \"ReportsModule\": 123,\r\n                \"EmailsModule\": 123,\r\n                \"TasksModule\": 123,\r\n                \"FullMainTimeline\": 123,\r\n                \"ChatModule\": 123,\r\n                \"FieldsCreatePermission\": 123,\r\n                \"FieldsEditPermission\": 123,\r\n                \"FieldsDeletePermission\": 123,\r\n                \"Editable\": 123,\r\n                \"Listable\": 123,\r\n                \"GoalsModule\": 123,\r\n                \"LibraryModule\": 123,\r\n                \"AttachmentBaseFolderCreatePermission\": 123,\r\n                \"ContactPublicFormsCreatePermission\": 123,\r\n                \"DealPublicFormsCreatePermission\": 123,\r\n                \"CreateDate\": 123,\r\n                \"UpdaterId\": 123,\r\n                \"UpdateDate\": 123,\r\n                \"QuoteSharePermission\": 123,\r\n                \"OrderSharePermission\": 123,\r\n                \"DocumentSharePermission\": 123,\r\n                \"InteractionRecordDeletePermission\": 123,\r\n                \"InteractionRecordEditPermission\": 123\r\n            },\r\n            \"display\": 123\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"FamilyId\": 123,\r\n            \"Name\": 123,\r\n            \"Code\": 123,\r\n            \"MeasurementUnit\": 123,\r\n            \"ImageUrl\": 123,\r\n            \"CurrencyId\": 123,\r\n            \"CreateImportId\": 123,\r\n            \"UpdateImportId\": 123,\r\n            \"Editable\": 123,\r\n            \"Deletable\": 123,\r\n            \"Suspended\": 123,\r\n            \"UpdaterId\": 123,\r\n            \"CreateDate\": 123,\r\n            \"LastUpdateDate\": 123,\r\n            \"ImportationIdCreate\": 123,\r\n            \"ImportationIdUpdate\": 123,\r\n            \"Group\": {\r\n                \"Name\": 123,\r\n                \"FamilyId\": 123,\r\n                \"FixedPrice\": 123,\r\n                \"CreateImportId\": 123,\r\n                \"UpdateImportId\": 123,\r\n                \"Editable\": 123,\r\n                \"Deletable\": 123,\r\n                \"Default\": 123,\r\n                \"LastUpdateDate\": 123,\r\n                \"ImportationIdCreate\": 123,\r\n                \"ImportationIdUpdate\": 123\r\n            },\r\n            \"Family\": 123,\r\n            \"Currency\": 123,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Name\": 123,\r\n                \"Email\": 123,\r\n                \"Phone\": 123,\r\n                \"AvatarUrl\": 123,\r\n                \"RoleId\": 123,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": 123,\r\n                \"LinkedIn\": 123,\r\n                \"Birthday\": 123,\r\n                \"NextAnniversary\": 123,\r\n                \"PreviousAnniversary\": 123,\r\n                \"Integration\": 123,\r\n                \"NativeIntegration\": 123,\r\n                \"GoogleAuthenticatorConfigured\": 123,\r\n                \"UserKey\": 123,\r\n                \"LastLogin\": 123,\r\n                \"Frequency\": 123,\r\n                \"AccountOwner\": 123,\r\n                \"ActiveSmtp\": 123,\r\n                \"LastSeen\": 123,\r\n                \"LastSeenRoute\": 123,\r\n                \"Editable\": 123,\r\n                \"Suspended\": 123,\r\n                \"UpdaterId\": 123,\r\n                \"CreateDate\": 123,\r\n                \"UpdateDate\": 123,\r\n                \"LastUpdateDate\": 123,\r\n                \"LastSeenPlatform\": 123,\r\n                \"ResetPassword\": 123,\r\n                \"NoLogin\": 123\r\n            },\r\n            \"Updater\": 123,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Deal - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"abc\",\r\n            \"Entity\": {\r\n                \"Id\": \"abc\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        }\r\n    ],\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"Profile\": {\r\n                \"Id\": \"abc\",\r\n                \"ContactsView\": \"abc\",\r\n                \"ContactsEdit\": \"abc\",\r\n                \"ContactsDelete\": \"abc\",\r\n                \"DealsView\": \"abc\",\r\n                \"DealsEdit\": \"abc\",\r\n                \"DealsDelete\": \"abc\",\r\n                \"LeadsView\": \"abc\",\r\n                \"LeadsEdit\": \"abc\",\r\n                \"LeadsDelete\": \"abc\",\r\n                \"OrdersView\": \"abc\",\r\n                \"OrdersEdit\": \"abc\",\r\n                \"OrdersDelete\": \"abc\",\r\n                \"UsersView\": \"abc\",\r\n                \"EmailsView\": \"abc\",\r\n                \"GoalsContactsCreate\": \"abc\",\r\n                \"GoalsDealsCreate\": \"abc\",\r\n                \"GoalsLeadsCreate\": \"abc\",\r\n                \"GoalsOrdersCreate\": \"abc\",\r\n                \"GoalsDocumentsCreate\": \"abc\",\r\n                \"GoalsTasksCreate\": \"abc\",\r\n                \"GoalsInteractionRecordsCreate\": \"abc\",\r\n                \"ChatPermission\": \"abc\",\r\n                \"LogsViewPermission\": \"abc\",\r\n                \"HomeMessagesCreate\": \"abc\",\r\n                \"TeamsView\": \"abc\",\r\n                \"CreatorId\": \"abc\"\r\n            },\r\n            \"UserId\": \"abc\"\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"GroupId\": \"abc\",\r\n            \"UnitPrice\": \"abc\",\r\n            \"CreatorId\": \"abc\",\r\n            \"Group\": {\r\n                \"Id\": \"abc\"\r\n            },\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": \"abc\",\r\n                \"ProfileId\": \"abc\",\r\n                \"CreatorId\": \"abc\"\r\n            },\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo\",\r\n    \"CurrencyId\": 1,\r\n    \"Amount\": 100,\r\n    \"ContactId\": 400608931,\r\n    \"PersonId\": null,\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002245,\r\n            \"Name\": \"marcador negocio\",\r\n            \"Color\": \"#5fc3e6\",\r\n            \"EntityId\": 5,\r\n            \"Entity\": {\r\n                \"Id\": 5,\r\n                \"Name\": \"{2:Aa:p}\"\r\n            },\r\n            \"TagId\": 40002245\r\n        }\r\n    ],\r\n    \"OriginId\": 40009334,\r\n    \"StartDate\": \"2023-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": 40006169,\r\n            \"Name\": \"Automação\",\r\n            \"AvatarUrl\": \"https://stgploomescrmprd01.blob.core.windows.net/crm-prd/automation.png\",\r\n            \"Profile\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Administrador\",\r\n                \"Administrator\": true,\r\n                \"ContactsModule\": true,\r\n                \"ContactsView\": 1,\r\n                \"ContactsEdit\": 1,\r\n                \"ContactsDelete\": 1,\r\n                \"ContactsPersonCreatePermission\": true,\r\n                \"ContactsCompanyCreatePermission\": true,\r\n                \"ContactsCreatePermission\": true,\r\n                \"ContactsProductsViewPermission\": true,\r\n                \"ContactsProductsCreatePermission\": true,\r\n                \"ContactsProductsEditPermission\": true,\r\n                \"ContactsProductsDeletePermission\": true,\r\n                \"DealsModule\": true,\r\n                \"DealsView\": 1,\r\n                \"DealsContactsView\": false,\r\n                \"DealsEdit\": 1,\r\n                \"DealsContactsEdit\": false,\r\n                \"DealsDelete\": 1,\r\n                \"DealsContactsDelete\": false,\r\n                \"DealsCreatePermission\": true,\r\n                \"DealsWinOrLosePermission\": true,\r\n                \"DealsReopenPermission\": true,\r\n                \"QuotesModule\": true,\r\n                \"QuotesCreatePermission\": true,\r\n                \"QuotesEditPermission\": true,\r\n                \"QuotesDeletePermission\": true,\r\n                \"LeadsModule\": true,\r\n                \"LeadsView\": 1,\r\n                \"LeadsEdit\": 1,\r\n                \"LeadsUpdateStatusPermission\": true,\r\n                \"LeadsDelete\": 1,\r\n                \"LeadsCreatePermission\": true,\r\n                \"OrdersModule\": true,\r\n                \"OrdersView\": 1,\r\n                \"OrdersEdit\": 1,\r\n                \"OrdersDelete\": 1,\r\n                \"OrdersCreatePermission\": true,\r\n                \"DocumentsModule\": true,\r\n                \"DocumentsCreatePermission\": true,\r\n                \"DocumentsEditPermission\": true,\r\n                \"DocumentsDeletePermission\": true,\r\n                \"UsersView\": 1,\r\n                \"ProductsAdministerPermission\": true,\r\n                \"ProductsCreatePermission\": true,\r\n                \"ProductsEditPermission\": true,\r\n                \"ProductsDeletePermission\": true,\r\n                \"TablesCreatePermission\": true,\r\n                \"LossReasonsCreatePermission\": true,\r\n                \"TagsCreatePermission\": true,\r\n                \"CitiesCreatePermission\": true,\r\n                \"OtherOptionsCreatePermission\": true,\r\n                \"ExcelExportPermission\": true,\r\n                \"ExcelImportPermission\": true,\r\n                \"ReportsModule\": true,\r\n                \"EmailsModule\": true,\r\n                \"EmailsView\": 1,\r\n                \"TasksModule\": true,\r\n                \"FullMainTimeline\": true,\r\n                \"GoalsContactsCreate\": 1,\r\n                \"GoalsDealsCreate\": 1,\r\n                \"GoalsLeadsCreate\": 1,\r\n                \"GoalsOrdersCreate\": 1,\r\n                \"GoalsDocumentsCreate\": 1,\r\n                \"GoalsTasksCreate\": 1,\r\n                \"GoalsInteractionRecordsCreate\": 1,\r\n                \"ChatModule\": true,\r\n                \"ChatPermission\": 1,\r\n                \"FieldsCreatePermission\": true,\r\n                \"FieldsEditPermission\": true,\r\n                \"FieldsDeletePermission\": true,\r\n                \"Editable\": false,\r\n                \"Listable\": true,\r\n                \"LogsViewPermission\": 1,\r\n                \"HomeMessagesCreate\": 1,\r\n                \"TeamsView\": 1,\r\n                \"GoalsModule\": true,\r\n                \"LibraryModule\": true,\r\n                \"AttachmentBaseFolderCreatePermission\": true,\r\n                \"ContactPublicFormsCreatePermission\": true,\r\n                \"DealPublicFormsCreatePermission\": true,\r\n                \"CreatorId\": 0,\r\n                \"CreateDate\": \"2018-07-19T22:47:24.9-03:00\",\r\n                \"UpdaterId\": null,\r\n                \"UpdateDate\": null,\r\n                \"QuoteSharePermission\": true,\r\n                \"OrderSharePermission\": true,\r\n                \"DocumentSharePermission\": true,\r\n                \"InteractionRecordDeletePermission\": true,\r\n                \"InteractionRecordEditPermission\": true\r\n            },\r\n            \"display\": \"Automação\",\r\n            \"UserId\": 40006169\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": 400037830,\r\n            \"GroupId\": 400032581,\r\n            \"FamilyId\": null,\r\n            \"Name\": \"teste Produto Relacionado\",\r\n            \"Code\": \"abc123\",\r\n            \"MeasurementUnit\": null,\r\n            \"ImageUrl\": null,\r\n            \"CurrencyId\": null,\r\n            \"UnitPrice\": 58.92,\r\n            \"CreateImportId\": null,\r\n            \"UpdateImportId\": null,\r\n            \"Editable\": true,\r\n            \"Deletable\": true,\r\n            \"Suspended\": false,\r\n            \"CreatorId\": 40006168,\r\n            \"UpdaterId\": null,\r\n            \"CreateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"LastUpdateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"ImportationIdCreate\": null,\r\n            \"ImportationIdUpdate\": null,\r\n            \"Group\": {\r\n                \"Id\": 400032581,\r\n                \"Name\": \"grupo teste\",\r\n                \"FamilyId\": null,\r\n                \"FixedPrice\": false,\r\n                \"CreateImportId\": null,\r\n                \"UpdateImportId\": null,\r\n                \"Editable\": true,\r\n                \"Deletable\": true,\r\n                \"Default\": true,\r\n                \"LastUpdateDate\": \"2023-02-04T15:30:45.18-03:00\",\r\n                \"ImportationIdCreate\": null,\r\n                \"ImportationIdUpdate\": null\r\n            },\r\n            \"Family\": null,\r\n            \"Currency\": null,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": 40006168,\r\n                \"Name\": \"Conta Teste Leonardo Ferraz - Não contatar\",\r\n                \"Email\": \"leonardo.ferraz@ploomes.com.br\",\r\n                \"Phone\": null,\r\n                \"AvatarUrl\": \"https://s3-sa-east-1.amazonaws.com/ploomescrm/avatar_default.jpg\",\r\n                \"RoleId\": null,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": null,\r\n                \"LinkedIn\": null,\r\n                \"Birthday\": null,\r\n                \"NextAnniversary\": null,\r\n                \"PreviousAnniversary\": null,\r\n                \"Integration\": false,\r\n                \"NativeIntegration\": false,\r\n                \"GoogleAuthenticatorConfigured\": null,\r\n                \"UserKey\": null,\r\n                \"LastLogin\": null,\r\n                \"Frequency\": null,\r\n                \"AccountOwner\": true,\r\n                \"ActiveSmtp\": false,\r\n                \"LastSeen\": \"2023-02-04T15:30:25.83-03:00\",\r\n                \"LastSeenRoute\": \"~/Deals/funnel/newdeal\",\r\n                \"Editable\": true,\r\n                \"Suspended\": false,\r\n                \"CreatorId\": 0,\r\n                \"UpdaterId\": null,\r\n                \"CreateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"UpdateDate\": null,\r\n                \"LastUpdateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"LastSeenPlatform\": \"Web\",\r\n                \"ResetPassword\": null,\r\n                \"NoLogin\": null\r\n            },\r\n            \"Updater\": null,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ],\r\n    \"StageId\": 40012386\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GET - Deals",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso Nenhum Filtro",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Todos os Filtros",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals?$top=15&$skip=0&$select=Id, Title, StatusId&$expand=Stage&$filter=((StatusId+eq+1))+and+(contains(Title,'Teste'))&$orderby=Id+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Title, StatusId"
+										},
+										{
+											"key": "$expand",
+											"value": "Stage"
+										},
+										{
+											"key": "$filter",
+											"value": "((StatusId+eq+1))+and+(contains(Title,'Teste'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Id+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Order por Id - ASC",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Order By ID\", function () {\r",
+											"    var a = 0, tmp = 0;\r",
+											"    var jsonData = pm.response.json();\r",
+											"    for (var i = a; i < jsonData.value.length-1; i++) {\r",
+											"        if(jsonData.value[i].Id > jsonData.value[i+1].Id) {\r",
+											"            tmp = tmp + 1;\r",
+											"        }\r",
+											"        pm.expect(tmp).to.be.eql(0);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals?$top=15&$skip=0&$select=Id, Title, StatusId&$expand=Stage&$filter=((StatusId+eq+1))+and+(contains(Title,'Teste'))&$orderby=Id+asc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Title, StatusId"
+										},
+										{
+											"key": "$expand",
+											"value": "Stage"
+										},
+										{
+											"key": "$filter",
+											"value": "((StatusId+eq+1))+and+(contains(Title,'Teste'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Id+asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso Order por Id - DESC",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Order By ID\", function () {\r",
+											"    var a = 0, tmp = 0;\r",
+											"    var jsonData = pm.response.json();\r",
+											"    for (var i = a; i < jsonData.value.length-1; i++) {\r",
+											"        if(jsonData.value[i].Id < jsonData.value[i+1].Id) {\r",
+											"            tmp = tmp + 1;\r",
+											"        }\r",
+											"        pm.expect(tmp).to.be.eql(0);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals?$top=15&$skip=0&$select=Id, Title, StatusId&$expand=Stage&$filter=((StatusId+eq+1))+and+(contains(Title,'Teste'))&$orderby=Id+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Title, StatusId"
+										},
+										{
+											"key": "$expand",
+											"value": "Stage"
+										},
+										{
+											"key": "$filter",
+											"value": "((StatusId+eq+1))+and+(contains(Title,'Teste'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Id+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Filtros em Branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals?$top=&$skip=&$select=&$expand=&$filter=&$orderby=",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": ""
+										},
+										{
+											"key": "$skip",
+											"value": ""
+										},
+										{
+											"key": "$select",
+											"value": ""
+										},
+										{
+											"key": "$expand",
+											"value": ""
+										},
+										{
+											"key": "$filter",
+											"value": ""
+										},
+										{
+											"key": "$orderby",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "ABC"
+									}
+								],
+								"url": {
+									"raw": "https://api2.ploomes.com/Deals?$top=15&$skip=0&$select=Id, Title, StatusId&$expand=Stage&$filter=((StatusId+eq+1))+and+(contains(Title,'Teste'))&$orderby=Id+desc",
+									"protocol": "https",
+									"host": [
+										"api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "15"
+										},
+										{
+											"key": "$skip",
+											"value": "0"
+										},
+										{
+											"key": "$select",
+											"value": "Id, Title, StatusId"
+										},
+										{
+											"key": "$expand",
+											"value": "Stage"
+										},
+										{
+											"key": "$filter",
+											"value": "((StatusId+eq+1))+and+(contains(Title,'Teste'))"
+										},
+										{
+											"key": "$orderby",
+											"value": "Id+desc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PATCH - Deals",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso - Parcial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo - Update Parcial\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - Sucesso - Completo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo - Update Completo\",\r\n    \"CurrencyId\": 1,\r\n    \"Amount\": 100,\r\n    \"ContactId\": 400608931,\r\n    \"PersonId\": null,\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002245,\r\n            \"Name\": \"marcador negocio\",\r\n            \"Color\": \"#5fc3e6\",\r\n            \"EntityId\": 5,\r\n            \"Entity\": {\r\n                \"Id\": 5,\r\n                \"Name\": \"{2:Aa:p}\"\r\n            },\r\n            \"TagId\": 40002245\r\n        }\r\n    ],\r\n    \"OriginId\": 40009334,\r\n    \"StartDate\": \"2023-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": 40006169,\r\n            \"Name\": \"Automação\",\r\n            \"AvatarUrl\": \"https://stgploomescrmprd01.blob.core.windows.net/crm-prd/automation.png\",\r\n            \"Profile\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Administrador\",\r\n                \"Administrator\": true,\r\n                \"ContactsModule\": true,\r\n                \"ContactsView\": 1,\r\n                \"ContactsEdit\": 1,\r\n                \"ContactsDelete\": 1,\r\n                \"ContactsPersonCreatePermission\": true,\r\n                \"ContactsCompanyCreatePermission\": true,\r\n                \"ContactsCreatePermission\": true,\r\n                \"ContactsProductsViewPermission\": true,\r\n                \"ContactsProductsCreatePermission\": true,\r\n                \"ContactsProductsEditPermission\": true,\r\n                \"ContactsProductsDeletePermission\": true,\r\n                \"DealsModule\": true,\r\n                \"DealsView\": 1,\r\n                \"DealsContactsView\": false,\r\n                \"DealsEdit\": 1,\r\n                \"DealsContactsEdit\": false,\r\n                \"DealsDelete\": 1,\r\n                \"DealsContactsDelete\": false,\r\n                \"DealsCreatePermission\": true,\r\n                \"DealsWinOrLosePermission\": true,\r\n                \"DealsReopenPermission\": true,\r\n                \"QuotesModule\": true,\r\n                \"QuotesCreatePermission\": true,\r\n                \"QuotesEditPermission\": true,\r\n                \"QuotesDeletePermission\": true,\r\n                \"LeadsModule\": true,\r\n                \"LeadsView\": 1,\r\n                \"LeadsEdit\": 1,\r\n                \"LeadsUpdateStatusPermission\": true,\r\n                \"LeadsDelete\": 1,\r\n                \"LeadsCreatePermission\": true,\r\n                \"OrdersModule\": true,\r\n                \"OrdersView\": 1,\r\n                \"OrdersEdit\": 1,\r\n                \"OrdersDelete\": 1,\r\n                \"OrdersCreatePermission\": true,\r\n                \"DocumentsModule\": true,\r\n                \"DocumentsCreatePermission\": true,\r\n                \"DocumentsEditPermission\": true,\r\n                \"DocumentsDeletePermission\": true,\r\n                \"UsersView\": 1,\r\n                \"ProductsAdministerPermission\": true,\r\n                \"ProductsCreatePermission\": true,\r\n                \"ProductsEditPermission\": true,\r\n                \"ProductsDeletePermission\": true,\r\n                \"TablesCreatePermission\": true,\r\n                \"LossReasonsCreatePermission\": true,\r\n                \"TagsCreatePermission\": true,\r\n                \"CitiesCreatePermission\": true,\r\n                \"OtherOptionsCreatePermission\": true,\r\n                \"ExcelExportPermission\": true,\r\n                \"ExcelImportPermission\": true,\r\n                \"ReportsModule\": true,\r\n                \"EmailsModule\": true,\r\n                \"EmailsView\": 1,\r\n                \"TasksModule\": true,\r\n                \"FullMainTimeline\": true,\r\n                \"GoalsContactsCreate\": 1,\r\n                \"GoalsDealsCreate\": 1,\r\n                \"GoalsLeadsCreate\": 1,\r\n                \"GoalsOrdersCreate\": 1,\r\n                \"GoalsDocumentsCreate\": 1,\r\n                \"GoalsTasksCreate\": 1,\r\n                \"GoalsInteractionRecordsCreate\": 1,\r\n                \"ChatModule\": true,\r\n                \"ChatPermission\": 1,\r\n                \"FieldsCreatePermission\": true,\r\n                \"FieldsEditPermission\": true,\r\n                \"FieldsDeletePermission\": true,\r\n                \"Editable\": false,\r\n                \"Listable\": true,\r\n                \"LogsViewPermission\": 1,\r\n                \"HomeMessagesCreate\": 1,\r\n                \"TeamsView\": 1,\r\n                \"GoalsModule\": true,\r\n                \"LibraryModule\": true,\r\n                \"AttachmentBaseFolderCreatePermission\": true,\r\n                \"ContactPublicFormsCreatePermission\": true,\r\n                \"DealPublicFormsCreatePermission\": true,\r\n                \"CreatorId\": 0,\r\n                \"CreateDate\": \"2018-07-19T22:47:24.9-03:00\",\r\n                \"UpdaterId\": null,\r\n                \"UpdateDate\": null,\r\n                \"QuoteSharePermission\": true,\r\n                \"OrderSharePermission\": true,\r\n                \"DocumentSharePermission\": true,\r\n                \"InteractionRecordDeletePermission\": true,\r\n                \"InteractionRecordEditPermission\": true\r\n            },\r\n            \"display\": \"Automação\",\r\n            \"UserId\": 40006169\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": 400037830,\r\n            \"GroupId\": 400032581,\r\n            \"FamilyId\": null,\r\n            \"Name\": \"teste Produto Relacionado\",\r\n            \"Code\": \"abc123\",\r\n            \"MeasurementUnit\": null,\r\n            \"ImageUrl\": null,\r\n            \"CurrencyId\": null,\r\n            \"UnitPrice\": 58.92,\r\n            \"CreateImportId\": null,\r\n            \"UpdateImportId\": null,\r\n            \"Editable\": true,\r\n            \"Deletable\": true,\r\n            \"Suspended\": false,\r\n            \"CreatorId\": 40006168,\r\n            \"UpdaterId\": null,\r\n            \"CreateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"LastUpdateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"ImportationIdCreate\": null,\r\n            \"ImportationIdUpdate\": null,\r\n            \"Group\": {\r\n                \"Id\": 400032581,\r\n                \"Name\": \"grupo teste\",\r\n                \"FamilyId\": null,\r\n                \"FixedPrice\": false,\r\n                \"CreateImportId\": null,\r\n                \"UpdateImportId\": null,\r\n                \"Editable\": true,\r\n                \"Deletable\": true,\r\n                \"Default\": true,\r\n                \"LastUpdateDate\": \"2023-02-04T15:30:45.18-03:00\",\r\n                \"ImportationIdCreate\": null,\r\n                \"ImportationIdUpdate\": null\r\n            },\r\n            \"Family\": null,\r\n            \"Currency\": null,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": 40006168,\r\n                \"Name\": \"Conta Teste Leonardo Ferraz - Não contatar\",\r\n                \"Email\": \"leonardo.ferraz@ploomes.com.br\",\r\n                \"Phone\": null,\r\n                \"AvatarUrl\": \"https://s3-sa-east-1.amazonaws.com/ploomescrm/avatar_default.jpg\",\r\n                \"RoleId\": null,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": null,\r\n                \"LinkedIn\": null,\r\n                \"Birthday\": null,\r\n                \"NextAnniversary\": null,\r\n                \"PreviousAnniversary\": null,\r\n                \"Integration\": false,\r\n                \"NativeIntegration\": false,\r\n                \"GoogleAuthenticatorConfigured\": null,\r\n                \"UserKey\": null,\r\n                \"LastLogin\": null,\r\n                \"Frequency\": null,\r\n                \"AccountOwner\": true,\r\n                \"ActiveSmtp\": false,\r\n                \"LastSeen\": \"2023-02-04T15:30:25.83-03:00\",\r\n                \"LastSeenRoute\": \"~/Deals/funnel/newdeal\",\r\n                \"Editable\": true,\r\n                \"Suspended\": false,\r\n                \"CreatorId\": 0,\r\n                \"UpdaterId\": null,\r\n                \"CreateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"UpdateDate\": null,\r\n                \"LastUpdateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"LastSeenPlatform\": \"Web\",\r\n                \"ResetPassword\": null,\r\n                \"NoLogin\": null\r\n            },\r\n            \"Updater\": null,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ],\r\n    \"StageId\": 40012386\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "400 - Objeto em branco - Obrigatoriedade",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Deal - Strings",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": 123,\r\n    \"Tags\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"Color\": 123,\r\n            \"Entity\": {\r\n                \"Name\": 123\r\n            }\r\n        }\r\n    ],\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Name\": 123,\r\n            \"AvatarUrl\": 123,\r\n            \"Profile\": {\r\n                \"Name\": 123,\r\n                \"Administrator\": 123,\r\n                \"ContactsModule\": 123,\r\n                \"ContactsPersonCreatePermission\": 123,\r\n                \"ContactsCompanyCreatePermission\": 123,\r\n                \"ContactsCreatePermission\": 123,\r\n                \"ContactsProductsViewPermission\": 123,\r\n                \"ContactsProductsCreatePermission\": 123,\r\n                \"ContactsProductsEditPermission\": 123,\r\n                \"ContactsProductsDeletePermission\": 123,\r\n                \"DealsModule\": 123,\r\n                \"DealsContactsView\": 123,\r\n                \"DealsContactsEdit\": 123,\r\n                \"DealsContactsDelete\": 123,\r\n                \"DealsCreatePermission\": 123,\r\n                \"DealsWinOrLosePermission\": 123,\r\n                \"DealsReopenPermission\": 123,\r\n                \"QuotesModule\": 123,\r\n                \"QuotesCreatePermission\": 123,\r\n                \"QuotesEditPermission\": 123,\r\n                \"QuotesDeletePermission\": 123,\r\n                \"LeadsModule\": 123,\r\n                \"LeadsUpdateStatusPermission\": 123,\r\n                \"LeadsCreatePermission\": 123,\r\n                \"OrdersModule\": 123,\r\n                \"OrdersCreatePermission\": 123,\r\n                \"DocumentsModule\": 123,\r\n                \"DocumentsCreatePermission\": 123,\r\n                \"DocumentsEditPermission\": 123,\r\n                \"DocumentsDeletePermission\": 123,\r\n                \"ProductsAdministerPermission\": 123,\r\n                \"ProductsCreatePermission\": 123,\r\n                \"ProductsEditPermission\": 123,\r\n                \"ProductsDeletePermission\": 123,\r\n                \"TablesCreatePermission\": 123,\r\n                \"LossReasonsCreatePermission\": 123,\r\n                \"TagsCreatePermission\": 123,\r\n                \"CitiesCreatePermission\": 123,\r\n                \"OtherOptionsCreatePermission\": 123,\r\n                \"ExcelExportPermission\": 123,\r\n                \"ExcelImportPermission\": 123,\r\n                \"ReportsModule\": 123,\r\n                \"EmailsModule\": 123,\r\n                \"TasksModule\": 123,\r\n                \"FullMainTimeline\": 123,\r\n                \"ChatModule\": 123,\r\n                \"FieldsCreatePermission\": 123,\r\n                \"FieldsEditPermission\": 123,\r\n                \"FieldsDeletePermission\": 123,\r\n                \"Editable\": 123,\r\n                \"Listable\": 123,\r\n                \"GoalsModule\": 123,\r\n                \"LibraryModule\": 123,\r\n                \"AttachmentBaseFolderCreatePermission\": 123,\r\n                \"ContactPublicFormsCreatePermission\": 123,\r\n                \"DealPublicFormsCreatePermission\": 123,\r\n                \"CreateDate\": 123,\r\n                \"UpdaterId\": 123,\r\n                \"UpdateDate\": 123,\r\n                \"QuoteSharePermission\": 123,\r\n                \"OrderSharePermission\": 123,\r\n                \"DocumentSharePermission\": 123,\r\n                \"InteractionRecordDeletePermission\": 123,\r\n                \"InteractionRecordEditPermission\": 123\r\n            },\r\n            \"display\": 123\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"FamilyId\": 123,\r\n            \"Name\": 123,\r\n            \"Code\": 123,\r\n            \"MeasurementUnit\": 123,\r\n            \"ImageUrl\": 123,\r\n            \"CurrencyId\": 123,\r\n            \"CreateImportId\": 123,\r\n            \"UpdateImportId\": 123,\r\n            \"Editable\": 123,\r\n            \"Deletable\": 123,\r\n            \"Suspended\": 123,\r\n            \"UpdaterId\": 123,\r\n            \"CreateDate\": 123,\r\n            \"LastUpdateDate\": 123,\r\n            \"ImportationIdCreate\": 123,\r\n            \"ImportationIdUpdate\": 123,\r\n            \"Group\": {\r\n                \"Name\": 123,\r\n                \"FamilyId\": 123,\r\n                \"FixedPrice\": 123,\r\n                \"CreateImportId\": 123,\r\n                \"UpdateImportId\": 123,\r\n                \"Editable\": 123,\r\n                \"Deletable\": 123,\r\n                \"Default\": 123,\r\n                \"LastUpdateDate\": 123,\r\n                \"ImportationIdCreate\": 123,\r\n                \"ImportationIdUpdate\": 123\r\n            },\r\n            \"Family\": 123,\r\n            \"Currency\": 123,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Name\": 123,\r\n                \"Email\": 123,\r\n                \"Phone\": 123,\r\n                \"AvatarUrl\": 123,\r\n                \"RoleId\": 123,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": 123,\r\n                \"LinkedIn\": 123,\r\n                \"Birthday\": 123,\r\n                \"NextAnniversary\": 123,\r\n                \"PreviousAnniversary\": 123,\r\n                \"Integration\": 123,\r\n                \"NativeIntegration\": 123,\r\n                \"GoogleAuthenticatorConfigured\": 123,\r\n                \"UserKey\": 123,\r\n                \"LastLogin\": 123,\r\n                \"Frequency\": 123,\r\n                \"AccountOwner\": 123,\r\n                \"ActiveSmtp\": 123,\r\n                \"LastSeen\": 123,\r\n                \"LastSeenRoute\": 123,\r\n                \"Editable\": 123,\r\n                \"Suspended\": 123,\r\n                \"UpdaterId\": 123,\r\n                \"CreateDate\": 123,\r\n                \"UpdateDate\": 123,\r\n                \"LastUpdateDate\": 123,\r\n                \"LastSeenPlatform\": 123,\r\n                \"ResetPassword\": 123,\r\n                \"NoLogin\": 123\r\n            },\r\n            \"Updater\": 123,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - Tipagem Inválida Deal - Integer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"EntityId\": \"abc\",\r\n            \"Entity\": {\r\n                \"Id\": \"abc\"\r\n            },\r\n            \"TagId\": \"abc\"\r\n        }\r\n    ],\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"Profile\": {\r\n                \"Id\": \"abc\",\r\n                \"ContactsView\": \"abc\",\r\n                \"ContactsEdit\": \"abc\",\r\n                \"ContactsDelete\": \"abc\",\r\n                \"DealsView\": \"abc\",\r\n                \"DealsEdit\": \"abc\",\r\n                \"DealsDelete\": \"abc\",\r\n                \"LeadsView\": \"abc\",\r\n                \"LeadsEdit\": \"abc\",\r\n                \"LeadsDelete\": \"abc\",\r\n                \"OrdersView\": \"abc\",\r\n                \"OrdersEdit\": \"abc\",\r\n                \"OrdersDelete\": \"abc\",\r\n                \"UsersView\": \"abc\",\r\n                \"EmailsView\": \"abc\",\r\n                \"GoalsContactsCreate\": \"abc\",\r\n                \"GoalsDealsCreate\": \"abc\",\r\n                \"GoalsLeadsCreate\": \"abc\",\r\n                \"GoalsOrdersCreate\": \"abc\",\r\n                \"GoalsDocumentsCreate\": \"abc\",\r\n                \"GoalsTasksCreate\": \"abc\",\r\n                \"GoalsInteractionRecordsCreate\": \"abc\",\r\n                \"ChatPermission\": \"abc\",\r\n                \"LogsViewPermission\": \"abc\",\r\n                \"HomeMessagesCreate\": \"abc\",\r\n                \"TeamsView\": \"abc\",\r\n                \"CreatorId\": \"abc\"\r\n            },\r\n            \"UserId\": \"abc\"\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": \"abc\",\r\n            \"GroupId\": \"abc\",\r\n            \"UnitPrice\": \"abc\",\r\n            \"CreatorId\": \"abc\",\r\n            \"Group\": {\r\n                \"Id\": \"abc\"\r\n            },\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": \"abc\",\r\n                \"ProfileId\": \"abc\",\r\n                \"CreatorId\": \"abc\"\r\n            },\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo\",\r\n    \"CurrencyId\": 1,\r\n    \"Amount\": 100,\r\n    \"ContactId\": 400608931,\r\n    \"PersonId\": null,\r\n    \"Tags\": [\r\n        {\r\n            \"Id\": 40002245,\r\n            \"Name\": \"marcador negocio\",\r\n            \"Color\": \"#5fc3e6\",\r\n            \"EntityId\": 5,\r\n            \"Entity\": {\r\n                \"Id\": 5,\r\n                \"Name\": \"{2:Aa:p}\"\r\n            },\r\n            \"TagId\": 40002245\r\n        }\r\n    ],\r\n    \"OriginId\": 40009334,\r\n    \"StartDate\": \"2023-02-04T00:00-03:00\",\r\n    \"OwnerId\": 40006168,\r\n    \"CollaboratingUsers\": [\r\n        {\r\n            \"Id\": 40006169,\r\n            \"Name\": \"Automação\",\r\n            \"AvatarUrl\": \"https://stgploomescrmprd01.blob.core.windows.net/crm-prd/automation.png\",\r\n            \"Profile\": {\r\n                \"Id\": 1,\r\n                \"Name\": \"Administrador\",\r\n                \"Administrator\": true,\r\n                \"ContactsModule\": true,\r\n                \"ContactsView\": 1,\r\n                \"ContactsEdit\": 1,\r\n                \"ContactsDelete\": 1,\r\n                \"ContactsPersonCreatePermission\": true,\r\n                \"ContactsCompanyCreatePermission\": true,\r\n                \"ContactsCreatePermission\": true,\r\n                \"ContactsProductsViewPermission\": true,\r\n                \"ContactsProductsCreatePermission\": true,\r\n                \"ContactsProductsEditPermission\": true,\r\n                \"ContactsProductsDeletePermission\": true,\r\n                \"DealsModule\": true,\r\n                \"DealsView\": 1,\r\n                \"DealsContactsView\": false,\r\n                \"DealsEdit\": 1,\r\n                \"DealsContactsEdit\": false,\r\n                \"DealsDelete\": 1,\r\n                \"DealsContactsDelete\": false,\r\n                \"DealsCreatePermission\": true,\r\n                \"DealsWinOrLosePermission\": true,\r\n                \"DealsReopenPermission\": true,\r\n                \"QuotesModule\": true,\r\n                \"QuotesCreatePermission\": true,\r\n                \"QuotesEditPermission\": true,\r\n                \"QuotesDeletePermission\": true,\r\n                \"LeadsModule\": true,\r\n                \"LeadsView\": 1,\r\n                \"LeadsEdit\": 1,\r\n                \"LeadsUpdateStatusPermission\": true,\r\n                \"LeadsDelete\": 1,\r\n                \"LeadsCreatePermission\": true,\r\n                \"OrdersModule\": true,\r\n                \"OrdersView\": 1,\r\n                \"OrdersEdit\": 1,\r\n                \"OrdersDelete\": 1,\r\n                \"OrdersCreatePermission\": true,\r\n                \"DocumentsModule\": true,\r\n                \"DocumentsCreatePermission\": true,\r\n                \"DocumentsEditPermission\": true,\r\n                \"DocumentsDeletePermission\": true,\r\n                \"UsersView\": 1,\r\n                \"ProductsAdministerPermission\": true,\r\n                \"ProductsCreatePermission\": true,\r\n                \"ProductsEditPermission\": true,\r\n                \"ProductsDeletePermission\": true,\r\n                \"TablesCreatePermission\": true,\r\n                \"LossReasonsCreatePermission\": true,\r\n                \"TagsCreatePermission\": true,\r\n                \"CitiesCreatePermission\": true,\r\n                \"OtherOptionsCreatePermission\": true,\r\n                \"ExcelExportPermission\": true,\r\n                \"ExcelImportPermission\": true,\r\n                \"ReportsModule\": true,\r\n                \"EmailsModule\": true,\r\n                \"EmailsView\": 1,\r\n                \"TasksModule\": true,\r\n                \"FullMainTimeline\": true,\r\n                \"GoalsContactsCreate\": 1,\r\n                \"GoalsDealsCreate\": 1,\r\n                \"GoalsLeadsCreate\": 1,\r\n                \"GoalsOrdersCreate\": 1,\r\n                \"GoalsDocumentsCreate\": 1,\r\n                \"GoalsTasksCreate\": 1,\r\n                \"GoalsInteractionRecordsCreate\": 1,\r\n                \"ChatModule\": true,\r\n                \"ChatPermission\": 1,\r\n                \"FieldsCreatePermission\": true,\r\n                \"FieldsEditPermission\": true,\r\n                \"FieldsDeletePermission\": true,\r\n                \"Editable\": false,\r\n                \"Listable\": true,\r\n                \"LogsViewPermission\": 1,\r\n                \"HomeMessagesCreate\": 1,\r\n                \"TeamsView\": 1,\r\n                \"GoalsModule\": true,\r\n                \"LibraryModule\": true,\r\n                \"AttachmentBaseFolderCreatePermission\": true,\r\n                \"ContactPublicFormsCreatePermission\": true,\r\n                \"DealPublicFormsCreatePermission\": true,\r\n                \"CreatorId\": 0,\r\n                \"CreateDate\": \"2018-07-19T22:47:24.9-03:00\",\r\n                \"UpdaterId\": null,\r\n                \"UpdateDate\": null,\r\n                \"QuoteSharePermission\": true,\r\n                \"OrderSharePermission\": true,\r\n                \"DocumentSharePermission\": true,\r\n                \"InteractionRecordDeletePermission\": true,\r\n                \"InteractionRecordEditPermission\": true\r\n            },\r\n            \"display\": \"Automação\",\r\n            \"UserId\": 40006169\r\n        }\r\n    ],\r\n    \"Products\": [\r\n        {\r\n            \"Id\": 400037830,\r\n            \"GroupId\": 400032581,\r\n            \"FamilyId\": null,\r\n            \"Name\": \"teste Produto Relacionado\",\r\n            \"Code\": \"abc123\",\r\n            \"MeasurementUnit\": null,\r\n            \"ImageUrl\": null,\r\n            \"CurrencyId\": null,\r\n            \"UnitPrice\": 58.92,\r\n            \"CreateImportId\": null,\r\n            \"UpdateImportId\": null,\r\n            \"Editable\": true,\r\n            \"Deletable\": true,\r\n            \"Suspended\": false,\r\n            \"CreatorId\": 40006168,\r\n            \"UpdaterId\": null,\r\n            \"CreateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"LastUpdateDate\": \"2023-02-04T15:30:50.867-03:00\",\r\n            \"ImportationIdCreate\": null,\r\n            \"ImportationIdUpdate\": null,\r\n            \"Group\": {\r\n                \"Id\": 400032581,\r\n                \"Name\": \"grupo teste\",\r\n                \"FamilyId\": null,\r\n                \"FixedPrice\": false,\r\n                \"CreateImportId\": null,\r\n                \"UpdateImportId\": null,\r\n                \"Editable\": true,\r\n                \"Deletable\": true,\r\n                \"Default\": true,\r\n                \"LastUpdateDate\": \"2023-02-04T15:30:45.18-03:00\",\r\n                \"ImportationIdCreate\": null,\r\n                \"ImportationIdUpdate\": null\r\n            },\r\n            \"Family\": null,\r\n            \"Currency\": null,\r\n            \"Parts\": [],\r\n            \"OtherProperties\": [],\r\n            \"Contacts\": [],\r\n            \"Lists\": [],\r\n            \"Creator\": {\r\n                \"Id\": 40006168,\r\n                \"Name\": \"Conta Teste Leonardo Ferraz - Não contatar\",\r\n                \"Email\": \"leonardo.ferraz@ploomes.com.br\",\r\n                \"Phone\": null,\r\n                \"AvatarUrl\": \"https://s3-sa-east-1.amazonaws.com/ploomescrm/avatar_default.jpg\",\r\n                \"RoleId\": null,\r\n                \"ProfileId\": 1,\r\n                \"Facebook\": null,\r\n                \"LinkedIn\": null,\r\n                \"Birthday\": null,\r\n                \"NextAnniversary\": null,\r\n                \"PreviousAnniversary\": null,\r\n                \"Integration\": false,\r\n                \"NativeIntegration\": false,\r\n                \"GoogleAuthenticatorConfigured\": null,\r\n                \"UserKey\": null,\r\n                \"LastLogin\": null,\r\n                \"Frequency\": null,\r\n                \"AccountOwner\": true,\r\n                \"ActiveSmtp\": false,\r\n                \"LastSeen\": \"2023-02-04T15:30:25.83-03:00\",\r\n                \"LastSeenRoute\": \"~/Deals/funnel/newdeal\",\r\n                \"Editable\": true,\r\n                \"Suspended\": false,\r\n                \"CreatorId\": 0,\r\n                \"UpdaterId\": null,\r\n                \"CreateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"UpdateDate\": null,\r\n                \"LastUpdateDate\": \"2023-02-04T10:01:27.36-03:00\",\r\n                \"LastSeenPlatform\": \"Web\",\r\n                \"ResetPassword\": null,\r\n                \"NoLogin\": null\r\n            },\r\n            \"Updater\": null,\r\n            \"AttachmentsItems\": [],\r\n            \"ProductId\": 400037830\r\n        }\r\n    ],\r\n    \"StageId\": 40012386\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - ID Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "authority",
+										"value": "app52-api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Title\": \"Teste Negócio Completo - Update Parcial\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals(12345678910987654321)",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals(12345678910987654321)"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DELETE - Deals",
+			"item": [
+				{
+					"name": "2XX",
+					"item": [
+						{
+							"name": "200 - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4XX",
+					"item": [
+						{
+							"name": "401 - Não autorizado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "abc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals({{ID_DEALS}})",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals({{ID_DEALS}})"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - ID Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authority",
+										"value": "api2.ploomes.com"
+									},
+									{
+										"key": "user-key",
+										"value": "{{USER_KEY}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://app52-api2.ploomes.com/Deals(12345678910987654321)",
+									"protocol": "https",
+									"host": [
+										"app52-api2",
+										"ploomes",
+										"com"
+									],
+									"path": [
+										"Deals(12345678910987654321)"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "Name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
