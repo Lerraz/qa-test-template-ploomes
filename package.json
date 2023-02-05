@@ -2,5 +2,12 @@
   "dependencies": {
     "newman": "^5.3.2",
     "newman-reporter-htmlextra": "^1.22.11"
+  },
+  "devDependencies": {
+    "cypress": "^12.5.1",
+    "cypress-plugin-tab": "^1.0.5"
+  },
+  "scripts": {
+    "cypress:open": "cypress open"
   }
 }
