@@ -35,3 +35,25 @@ newman run newman/Deals.postman_collection.json --globals newman/workspace.postm
 4. Verificar quais campos são obrigatórios para uma requisição e implementar tanto no frontend quanto no backend para evitar chamadas em branco e sem dados importantes;
 5. Incluir na documentação informações de **min** e **máx** de caracteres, tipagem, exemplo de dados e qual o retorno esperado do serviço;
 6. As requisições não precisam conter campos com valores **null**, o exemplo é tanto para o frontend mandando a requisição para o backend, quanto o backend mandando informações para popular o frontend. Se o campo não tem valor, não é necessario enviá-lo e recebe-lo.
+
+# Testes Funcionais  
+# Automatização com Cypress  
+  
+## Instruções de Execução  
+  
+## Cypress  
+Instale as dependências com **npm install** e execute o comando:  
+  
+> **Cypress**  
+npm run cypress:open   
+  
+## Limitações e BUGs  
+  
+1. O Token de acesso não expira, é interessante adicionar uma rotina de Refresh token com um tempo de expiração caso a aplicação fique sem chamadas por 'x' tempo;
+2. Em diversos momentos tive dificuldade de achar seletores que o cypress reconhecesse, para evitar um trabalho extra nesse momento, instalei a lib **"cypress-plugin-tab"** para poder efetuar a navegação por teclado (tecla **TAB**) e contornar o problema;
+3. O sistema não está desenvolvido pensando em acessibilidade;
+
+## Sugestões e Melhorias
+
+1. Multiplas chamadas aos mesmo serviços da API, é preciso estudar mais a arquitetura para verificar a necessidade de tantas chamadas. Aconselho efetuar chamadas com menos filtros, e utilizar cache para as informações;
+2. Se o foco é trabalhar com Cypress para automação dos serviços, incluir no frontend um atributo chamado **data-cy** com um nome único, isso facilitará muito o trabalho do QA.
